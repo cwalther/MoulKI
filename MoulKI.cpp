@@ -514,7 +514,15 @@ void MoulKI::loadStateDescriptors(hsStream* S) {
         str->setKey(ntdKeys);
         str->open(S, fmRead, plEncryptedStream::kEncDroid);
 
-        sdlmgr->ReadDescriptors(str);
+        if(S->size() > 1024*1024) {
+            qWarning("saving python.pak");
+            hsFileStream fs(PlasmaVer::pvMoul);
+            fs.open("python.pak", fmCreate);
+            fs.writeFrom(str);
+            fs.close();
+        }else{
+            sdlmgr->ReadDescriptors(str);
+        }
 
         delete str;
     }

@@ -92,6 +92,8 @@ void qtAuthClient::onFileListReply(uint32_t, ENetError,
     for (size_t i = 0; i < count; i++) {
         pendingSdlFiles.append(files[i]);
     }
+    pnAuthFileItem pythonpak = {"Python\\python.pak", 0};
+    pendingSdlFiles.append(pythonpak);
     currentPendingSdlFile = 0;
     downloadNextSdlFile();
 }
